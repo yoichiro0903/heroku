@@ -38,7 +38,7 @@
   // ユーザに返すテキスト。
   // 必ず山越の釜玉うどんを勧める。
   $responseText = <<< EOM
-「{$requestText}」ですね。わかりました。そんなときには山越の釜玉うどん。http://yamagoeudon.com
+「{$requestText}」ですね。わかりました。
 EOM;
 
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
@@ -50,8 +50,8 @@ EOM;
   $responseMessage = <<< EOM
     {
       "to":["{$requestFrom}"],
-      "toChannel":1383378250,
-      "eventType":"138311608800106203",
+      "toChannel":"1465980084",
+      "eventType":"138311609000106303",
       "content":{
         "contentType":1,
         "toType":1,
