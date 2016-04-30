@@ -1,4 +1,5 @@
 <?php
+error_log("callback start.");
   // アカウント情報を設定します。
   // LINE developers サイトの Channels > Basic informationに
   // 記載されている情報を設定します。
@@ -59,6 +60,7 @@ EOM;
       }
     }
 EOM;
+error_log("callback end.");
 
   // LINE BOT API へのリクエストを作成して実行
   $curl = curl_init('https://trialbot-api.line.me/v1/events');
@@ -70,4 +72,5 @@ EOM;
   curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
   curl_setopt($curl, CURLOPT_PROXY, getenv('http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com'));
   $output = curl_exec($curl);
+  error_log($output);
 ?>
