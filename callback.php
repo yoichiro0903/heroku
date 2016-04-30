@@ -50,7 +50,7 @@ EOM;
   $responseMessage = <<< EOM
     {
       "to":["{$requestFrom}"],
-      "toChannel":"1465980084",
+      "toChannel":1383378250,
       "eventType":"138311609000106303",
       "content":{
         "contentType":1,
@@ -68,6 +68,6 @@ EOM;
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   // Heroku Addon の Fixie のプロキシURLを指定。詳細は後述。
   curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
-  curl_setopt($curl, CURLOPT_PROXY, getenv('http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com:80'));
+  curl_setopt($curl, CURLOPT_PROXY, getenv('http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com'));
   $output = curl_exec($curl);
 ?>
