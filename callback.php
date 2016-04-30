@@ -70,7 +70,7 @@ error_log("callback end.");
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   // Heroku Addon の Fixie のプロキシURLを指定。詳細は後述。
   curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
-  curl_setopt($curl, CURLOPT_PROXY, getenv('http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com'));
+  curl_setopt($curl, CURLOPT_PROXY, getenv('http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com:80'));
   $output = curl_exec($curl);
   error_log($output);
 ?>
