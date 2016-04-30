@@ -1,4 +1,5 @@
 <?php
+require "response_cul.php";
 error_log("callback start.");
   // アカウント情報を設定します。
   // LINE developers サイトの Channels > Basic informationに
@@ -37,11 +38,9 @@ error_log("callback start.");
   );
 
   // ユーザに返すテキスト。
-  // 必ず山越の釜玉うどんを勧める。
-  $responseText = <<< EOM
-「{$requestText}」ですね。わかりました。
-EOM;
-
+//$requestText = 'a';
+$responseText = return_word($requestText);
+//echo return_word($responseText);
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
   // to にはレスポンス先ユーザの MID を配列の形で指定。
   // toChannel、eventTypeは固定の数値・文字列を指定。
@@ -73,4 +72,5 @@ error_log("callback end.");
   curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
   $output = curl_exec($curl);
   error_log($output);
+
 ?>
