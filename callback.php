@@ -144,9 +144,9 @@ function api_post_request($path, $post) {
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
-    curl_setopt($ch, CURLOPT_PROXY, getenv("http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com:80"));
-    curl_setopt($ch, CURLOPT_PROXYPORT, 80);
+    curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
+    curl_setopt($curl, CURLOPT_PROXY, getenv("http://fixie:RI6IOrzzcysgZDI@velodrome.usefixie.com:80"));
+    curl_setopt($curl, CURLOPT_PROXYPORT, 80);
 
     $output = curl_exec($curl);
     error_log($output);
