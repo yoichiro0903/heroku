@@ -1,6 +1,7 @@
 <?php
 // phpQueryの読み込み
 require_once("phpQuery-onefile.php");
+require_once("url_shortener.php");
 
 function scrape($title){
     $title = $title.' 1巻 マンガ';
@@ -24,7 +25,7 @@ function scrape($title){
         "respose_header" => $responseHeaderText,
         "comic_title"    => $topResultComicTitle,
         "comic_star"     => $topResultComicStar,
-        "comic_link"     => $topResultComicDetailLink,
+        "comic_link"     => shortenUrl($topResultComicDetailLink),
         "comic_img"      => $topResultComicImg
     );
     var_dump($resultSet);
@@ -43,22 +44,6 @@ function getHtmlData($url){
     $htmlData = phpQuery::newDocument($htmlData);
 
     return $htmlData;
-
-    //html取得
-    // $ch = curl_init();
-    // curl_setopt($ch, CURLOPT_URL, $url);
-    // curl_setopt($ch, CURLOPT_HEADER, FALSE);
-    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-    // curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17');
-    // $htmlData = curl_exec($ch);
-    // curl_close($ch);
-
-    // //文字化け対策
-    // mb_language('Japanese');
-    // $htmlData = mb_convert_encoding($htmlData,'utf8', 'auto');
-    // var_dump($htmlData);
-    //sleep(10);
 }
 
 ?>
