@@ -63,6 +63,7 @@ error_log("callback start.");
           },
           {
             "contentType":2,
+            "toType":1,
             "originalContentUrl":"{$responseArray['comic_img']}",
             "previewImageUrl":"{$responseArray['comic_img']}"
           }
