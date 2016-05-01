@@ -9,26 +9,33 @@ function scrape($title){
     $url = 'https://www.amazon.co.jp/s/&field-keywords='.$titleForUrl;
 
     $topResultHtml = getHtmlData($url);
-    $topResult = $topResultHtml["#result_0"];
 
-    $topResultComicDetailLink = pq($topResult)->find('a')->attr('href');
-    $topResultComicImg = pq($topResult)->find('img')->attr('src');
+    if ($topResultHtml['#noResultsTitle']){
+                $resultSet = array(
+            "respose_header" => 'ああ、すみません。「'.$title.'」だと、面白いマンガがありすぎて絞れません...'
+        );
+    } else {
+        $topResult = $topResultHtml["#result_0"];
+        $topResultComicDetailLink = pq($topResult)->find('a')->attr('href');
+        $topResultComicImg = pq($topResult)->find('img')->attr('src');
 
-    $topResultComicTitleHtmlEntities = pq($topResult)->find('h2')->attr('data-attribute');
-    $topResultComicTitle =  html_entity_decode($topResultComicTitleHtmlEntities);
+        $topResultComicTitleHtmlEntities = pq($topResult)->find('h2')->attr('data-attribute');
+        $topResultComicTitle =  html_entity_decode($topResultComicTitleHtmlEntities);
 
-    $topResultComicStar = pq($topResult['.a-icon-star'])->find('span')->text();
+        $topResultComicStar = pq($topResult['.a-icon-star'])->find('span')->text();
 
-    $responseHeaderText = "えーっと、それはもしかして、こちらですか？";
+        $responseHeaderText = "えーっと、それはもしかして、こちらですか？";
 
-    $resultSet = array(
-        "respose_header" => $responseHeaderText,
-        "comic_title"    => $topResultComicTitle,
-        "comic_star"     => $topResultComicStar,
-        "comic_link"     => shortenUrl($topResultComicDetailLink),
-        "comic_img"      => $topResultComicImg
-    );
-    var_dump($resultSet);
+        $resultSet = array(
+            "respose_header" => $responseHeaderText,
+            "comic_title"    => $topResultComicTitle,
+            "comic_star"     => $topResultComicStar,
+            "comic_link"     => shortenUrl($topResultComicDetailLink),
+            "comic_img"      => $topResultComicImg
+        );
+        var_dump($resultSet);    
+    }
+
     return $resultSet;
 }
 
