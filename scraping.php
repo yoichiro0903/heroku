@@ -3,16 +3,17 @@
 require_once("phpQuery-onefile.php");
 require_once("url_shortener.php");
 
-function scrape($title){
-    $title = $title.' 1巻 マンガ';
+function scrape($original_title){
+    $title = $original_title.' 1巻 マンガ';
     $titleForUrl = urlencode($title);
     $url = 'https://www.amazon.co.jp/s/&field-keywords='.$titleForUrl;
 
     $topResultHtml = getHtmlData($url);
+    $resultChkFlg = pq($topResultHtml['#noResultsTitle'])->text();
 
-    if ($topResultHtml['#noResultsTitle']){
+    if (strlen($resultChkFlg) > 0){
                 $resultSet = array(
-            "respose_header" => 'ああ、すみません。「'.$title.'」だと、面白いマンガがありすぎて絞れません...'
+            "respose_header" => '「'.$original_title.'」だと、ちょとわからない...'
         );
     } else {
         $topResult = $topResultHtml["#result_0"];
