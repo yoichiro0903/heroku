@@ -1,5 +1,7 @@
 <?php
 require "response_cul.php";
+require "scraping.php";
+
 error_log("callback start.");
   // アカウント情報を設定します。
   // LINE developers サイトの Channels > Basic informationに
@@ -38,9 +40,9 @@ error_log("callback start.");
   );
 
   // ユーザに返すテキスト。
-//$requestText = 'a';
-$responseText = return_word($requestText);
-//echo return_word($responseText);
+  $responseArray = scrape($requestText);
+  $responseText = implode("\n", $responseArray). "\n";
+
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
   // to にはレスポンス先ユーザの MID を配列の形で指定。
   // toChannel、eventTypeは固定の数値・文字列を指定。
@@ -53,12 +55,22 @@ $responseText = return_word($requestText);
       "toChannel":1383378250,
       "eventType":"138311608800106203",
       "content":{
-        "contentType":1,
-        "toType":1,
-        "text":"{$responseText}"
+        "messages":[
+          {
+            "contentType":1,
+            "toType":1,
+            "text":"{$responseText}"
+          },
+          {
+            "contentType":2,
+            "originalContentUrl":"{$responseArray['comic_img']}",
+            "previewImageUrl":"{$responseArray['comic_img']}"
+          }
+        ]
       }
     }
 EOM;
+var_dump($responseMessage);
 error_log("callback end.");
 
   // LINE BOT API へのリクエストを作成して実行
