@@ -6,7 +6,7 @@ require_once("url_shortener.php");
 function scrape($original_title){
     $title = $original_title.' 1 マンガ';
     $titleForUrl = urlencode($title);
-    $url = 'https://www.amazon.co.jp/s/&field-keywords='.$titleForUrl;
+    $url = 'https://www.amazon.co.jp/s/url=search-alias%3Dstripbooks&field-keywords='.$titleForUrl;
 
     $topResultHtml = getHtmlData($url);
     $resultChkFlg = pq($topResultHtml['#noResultsTitle'])->text();
