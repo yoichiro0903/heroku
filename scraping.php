@@ -4,7 +4,7 @@ require_once("phpQuery-onefile.php");
 require_once("url_shortener.php");
 
 function scrape($original_title){
-    $title = $original_title.' 1巻 マンガ';
+    $title = $original_title.'afadfafa 1巻 マンガ';
     $titleForUrl = urlencode($title);
     $url = 'https://www.amazon.co.jp/s/&field-keywords='.$titleForUrl;
 
@@ -37,8 +37,9 @@ function scrape($original_title){
             $n++;
         }
         $randKey = rand(0,19);
-        $resultSet = $rankRowArray[$randKey];
+        $resultSet = array_values($rankRowArray[$randKey]);
         var_dump($resultSet);
+        return $resultSet[0];
     } else {
         $topResult = $topResultHtml["#result_0"];
         $topResultComicDetailLink = pq($topResult)->find('a')->attr('href');
@@ -58,10 +59,8 @@ function scrape($original_title){
             "comic_link"     => shortenUrl($topResultComicDetailLink),
             "comic_img"      => $topResultComicImg
         );
-        var_dump($resultSet);    
+        return $resultSet;
     }
-
-    return $resultSet;
 }
 
 function getHtmlData($url){

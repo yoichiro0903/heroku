@@ -41,6 +41,8 @@ error_log("callback start.");
 
   // ユーザに返すテキスト。
   $responseArray = scrape($requestText);
+  print "callback";
+  var_dump($responseArray);
   // $responseText = implode(",", $responseArray);
 
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
@@ -107,7 +109,7 @@ EOM;
 // EOM;
 //   }
 
-// var_dump($responseMessage);
+var_dump($responseMessage);
 error_log("callback end.");
 
   // LINE BOT API へのリクエストを作成して実行
