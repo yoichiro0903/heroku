@@ -72,7 +72,7 @@ function getHtmlData($url){
                     )
             );
     $context = stream_context_create($opts);
-    mb_language('Japanese');
+    // mb_language('Japanese');
     $htmlData = file_get_contents($url, false, $context);
     $htmlData = mb_convert_encoding($htmlData, 'utf8', 'auto');
     //var_dump($htmlData);
