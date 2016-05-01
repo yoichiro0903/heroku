@@ -92,7 +92,7 @@ EOM;
     {
       "to":["{$requestFrom}"],
       "toChannel":1383378250,
-      "eventType":"138311608800106203",
+      "eventType":"140177271400161403",
       "content":{
         "messages":[
           {
