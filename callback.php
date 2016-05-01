@@ -41,7 +41,7 @@ error_log("callback start.");
 
   // ユーザに返すテキスト。
   $responseArray = scrape($requestText);
-  $responseText = implode("\n", $responseArray). "\n";
+  $responseText = implode(",", $responseArray);
 
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
   // to にはレスポンス先ユーザの MID を配列の形で指定。
