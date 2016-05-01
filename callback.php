@@ -41,7 +41,7 @@ error_log("callback start.");
 
   // ユーザに返すテキスト。
   $responseArray = scrape($requestText);
-  $responseText = implode(",", $responseArray);
+  // $responseText = implode(",", $responseArray);
 
   // LINE BOT API 経由でユーザに渡すことになるJSONデータを作成。
   // to にはレスポンス先ユーザの MID を配列の形で指定。
@@ -59,7 +59,22 @@ error_log("callback start.");
           {
             "contentType":1,
             "toType":1,
-            "text":"{$responseText}"
+            "text":"{$responseArray['respose_header']}"
+          },
+          {
+            "contentType":1,
+            "toType":1,
+            "text":"{$responseArray['comic_title']}"
+          },
+          {
+            "contentType":1,
+            "toType":1,
+            "text":"{$responseArray['comic_star']}"
+          },
+          {
+            "contentType":1,
+            "toType":1,
+            "text":"{$responseArray['comic_link']}"
           },
           {
             "contentType":2,
