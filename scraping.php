@@ -4,7 +4,7 @@ require_once("phpQuery-onefile.php");
 require_once("url_shortener.php");
 
 function scrape($original_title){
-    $title = $original_title.'afadfafa 1巻 マンガ';
+    $title = $original_title.' 1巻 マンガ';
     $titleForUrl = urlencode($title);
     $url = 'https://www.amazon.co.jp/s/&field-keywords='.$titleForUrl;
 
