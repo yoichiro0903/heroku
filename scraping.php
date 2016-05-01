@@ -45,6 +45,8 @@ function scrape($original_title){
         $topResult = $topResultHtml["#result_0"];
         $topResultComicDetailLink = pq($topResult)->find('a')->attr('href');
         $topResultComicImg = pq($topResult)->find('img')->attr('src');
+        $topResultComicImg = str_replace("AA160", "AA240", $topResultComicImg);
+
 
         $topResultComicTitleHtmlEntities = pq($topResult)->find('h2')->attr('data-attribute');
         $topResultComicTitle =  html_entity_decode($topResultComicTitleHtmlEntities);
