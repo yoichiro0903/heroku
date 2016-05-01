@@ -52,7 +52,10 @@ error_log("callback start.");
   // toType は、ユーザへのレスポンスの場合は 1。
   // text には、ユーザに返すテキストを指定。
 
-  // if ($responseArray['comic_title'] && $responseArray['comic_star'] && $responseArray['comic_link'] && $responseArray['comic_img']){
+  if (strlen($responseArray['comic_title']) == 0){ $responseArray['comic_title'] = 'タイトル無し。'; }
+  if (strlen($responseArray['comic_star']) == 0){ $responseArray['comic_star'] = '評価無し。'; }
+  if (strlen($responseArray['comic_link']) == 0){ $responseArray['comic_link'] = 'ページリンクが存在しません。'; }
+  if (strlen($responseArray['comic_img']) == 0){ $responseArray['comic_img'] = '書影なし。'; }
   $responseMessage = <<< EOM
     {
       "to":["{$requestFrom}"],
