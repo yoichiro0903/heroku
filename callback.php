@@ -49,7 +49,8 @@ error_log("callback start.");
   // contentType は、テキストを返す場合は 1。
   // toType は、ユーザへのレスポンスの場合は 1。
   // text には、ユーザに返すテキストを指定。
-  if ($responseArray['comic_title'] && $responseArray['comic_star'] && $responseArray['comic_link'] && $responseArray['comic_img']){
+
+  // if ($responseArray['comic_title'] && $responseArray['comic_star'] && $responseArray['comic_link'] && $responseArray['comic_img']){
   $responseMessage = <<< EOM
     {
       "to":["{$requestFrom}"],
@@ -87,26 +88,26 @@ error_log("callback start.");
       }
     }
 EOM;
-  } else {
-  $responseMessage = <<< EOM
-    {
-      "to":["{$requestFrom}"],
-      "toChannel":1383378250,
-      "eventType":"140177271400161403",
-      "content":{
-        "messages":[
-          {
-            "contentType":1,
-            "toType":1,
-            "text":"{$responseArray['respose_header']}"
-          }
-        ]
-      }
-    }
-EOM;
-  }
+//   } else {
+//   $responseMessage = <<< EOM
+//     {
+//       "to":["{$requestFrom}"],
+//       "toChannel":1383378250,
+//       "eventType":"140177271400161403",
+//       "content":{
+//         "messages":[
+//           {
+//             "contentType":1,
+//             "toType":1,
+//             "text":"{$responseArray['respose_header']}"
+//           }
+//         ]
+//       }
+//     }
+// EOM;
+//   }
 
-var_dump($responseMessage);
+// var_dump($responseMessage);
 error_log("callback end.");
 
   // LINE BOT API へのリクエストを作成して実行

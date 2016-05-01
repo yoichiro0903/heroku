@@ -12,9 +12,33 @@ function scrape($original_title){
     $resultChkFlg = pq($topResultHtml['#noResultsTitle'])->text();
 
     if (strlen($resultChkFlg) > 0){
-                $resultSet = array(
-            "respose_header" => '「'.$original_title.'」だと、ちょとわからない...'
-        );
+        $rankingUrl = 'https://www.amazon.co.jp/gp/bestsellers/books/2278488051/';
+        $rankingResultHtml = getHtmlData($rankingUrl);
+        $rankRowArray = array();
+        $n = 0;
+        foreach ($rankingResultHtml[".zg_itemRow"] as $rankRow) {
+            $rankTitle = pq($rankRow)->find('.zg_title')->find('a')->text();
+            $rankStar = pq($rankRow)->find('.a-icon-star')->find('span')->text();
+            $rankLink = pq($rankRow)->find('a')->attr('href');
+            $rankImg = pq($rankRow)->find('img')->attr('src');
+
+            $responseHeaderText = "「".$original_title."」だと、ちょとわからない...代わりにこれでも嫁。最近人気。";
+
+            $rankSet = array(
+                $n => array(
+                    "respose_header" => $responseHeaderText,
+                    "comic_title"    => $rankTitle,
+                    "comic_star"     => $rankStar,
+                    "comic_link"     => shortenUrl($rankLink),
+                    "comic_img"      => $rankImg
+                )
+            );
+            array_push($rankRowArray, $rankSet);
+            $n++;
+        }
+        $randKey = rand(0,19);
+        $resultSet = $rankRowArray[$randKey];
+        var_dump($resultSet);
     } else {
         $topResult = $topResultHtml["#result_0"];
         $topResultComicDetailLink = pq($topResult)->find('a')->attr('href');
@@ -48,7 +72,10 @@ function getHtmlData($url){
                     )
             );
     $context = stream_context_create($opts);
+    mb_language('Japanese');
     $htmlData = file_get_contents($url, false, $context);
+    $htmlData = mb_convert_encoding($htmlData, 'utf8', 'auto');
+    //var_dump($htmlData);
     $htmlData = phpQuery::newDocument($htmlData);
 
     return $htmlData;
