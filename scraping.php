@@ -4,7 +4,7 @@ require_once("phpQuery-onefile.php");
 require_once("url_shortener.php");
 
 function scrape($original_title){
-    $title = $original_title.'　１　マンガ';
+    $title = $original_title.'fadfa　１　マンガ';
     $titleForUrl = urlencode($title);
     $url = 'https://www.amazon.co.jp/s/url=search-alias%3Dstripbooks&field-keywords='.$titleForUrl;
 
@@ -21,6 +21,7 @@ function scrape($original_title){
             $rankStar = pq($rankRow)->find('.a-icon-star')->find('span')->text();
             $rankLink = pq($rankRow)->find('a')->attr('href');
             $rankImg = pq($rankRow)->find('img')->attr('src');
+            $rankImg = str_replace("SL160", "SL240", $rankImg);
 
             $responseHeaderText = "「".$original_title."」だと、ちょとわからない...代わりにこれでも嫁。最近人気。";
 
